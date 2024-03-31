@@ -35,6 +35,8 @@ docker run -it --privileged --rm -v ./:/work -w /work archlinux:latest bash ./cr
 wsl --import myarch D:/WSL D:/archlinux-rootfs-wslg.tar.gz --version 2
 ```
 
+## 安装后续
+
 ### 进入 WSL 并创建普通用户
 ```bash
 wsl -d myarch
@@ -52,6 +54,10 @@ sudo sed -i "s|^#default=.*|default=$USERNAME|" /etc/wsl.conf
 wsl -t myarch
 wsl -d myarch
 
+```
+
+### 启动用户态服务
+```bash
 systemctl --user enable --now fcitx5 wsl-wayland-socket
 ```
 ![alt text](images/user-systemctl-status.png)
