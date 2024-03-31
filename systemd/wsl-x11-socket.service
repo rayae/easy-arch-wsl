@@ -1,0 +1,9 @@
+[Unit]
+Description=Bind WSLg X11 socket to /tmp
+
+[Service]
+Type=oneshot
+ExecStart=mount -o bind,ro,X-mount.mkdir -t none /mnt/wslg/.X11-unix /tmp/.X11-unix
+
+[Install]
+WantedBy=default.target

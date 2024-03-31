@@ -1,0 +1,9 @@
+[Unit]
+Description=Fcitx5
+
+[Service]
+ExecStart=fcitx5 --disable=wayland --verbose '*'=0
+Restart=always
+
+[Install]
+WantedBy=default.target

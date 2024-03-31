@@ -1,0 +1,35 @@
+name: Build rootfs
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 8 1 * *'
+
+jobs:
+  build-rootfs:
+    runs-on: ubuntu-latest
+    name: "Build rootfs"
+    container: 
+      image: archlinux
+      options: --privileged -w /work -v ./:/work
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check version
+        run: echo "ARCH_VERSION=$(date +%Y%m%d)" >> $GITHUB_ENV
+      - name: Build with WSLg
+        run:  ./create-rootfs.sh --with-wslg --output archlinux-rootfs.tar.gz
+        # run:  touch archlinux-rootfs.tar.gz archlinux-rootfs.tar.gz.sha256sum
+      - name: Build without WSLg
+        run:  ./create-rootfs.sh --output archlinux-rootfs-wslg.tar.gz
+        # run:  touch archlinux-rootfs-wslg.tar.gz archlinux-rootfs-wslg.tar.gz.sha256sum
+      - name: Upload
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          tag_name: "${{ env.ARCH_VERSION }}"
+          files: |
+            archlinux-rootfs.tar.gz
+            archlinux-rootfs.tar.gz.sha256sum
+            archlinux-rootfs-wslg.tar.gz
+            archlinux-rootfs-wslg.tar.gz.sha256sum
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
