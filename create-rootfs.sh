@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 set -e
-set -x
+# set -x
 
 # 初始化 Pacman
 echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirrorlist
@@ -118,7 +118,7 @@ fi
 rm -rf $rootfs/var/cache/pacman/pkg/*
 
 # 生成 rootfs.tar.gz
-tar -czvf "$output" -C $rootfs ./
+tar -czf "$output" -C $rootfs ./
 sha256sum "$output" > "$output".sha256sum
 du -h "$output"
 chmod 0777 "$output"
