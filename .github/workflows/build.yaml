@@ -3,10 +3,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '00 8 1 * *'
-
+permissions:
+  contents: write
 jobs:
   build-rootfs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     name: "Build rootfs"
     container: 
       image: archlinux
@@ -17,13 +20,13 @@ jobs:
       - name: Check version
         run: echo "ARCH_VERSION=$(date +%Y%m%d)" >> $GITHUB_ENV
       - name: Build with WSLg
-        run:  ./create-rootfs.sh --with-wslg --output archlinux-rootfs.tar.gz
+        run:  ./create-rootfs.sh --with-wslg --output archlinux-rootfs-wslg.tar.gz
         # run:  touch archlinux-rootfs.tar.gz archlinux-rootfs.tar.gz.sha256sum
       - name: Build without WSLg
-        run:  ./create-rootfs.sh --output archlinux-rootfs-wslg.tar.gz
+        run:  ./create-rootfs.sh --output archlinux-rootfs.tar.gz
         # run:  touch archlinux-rootfs-wslg.tar.gz archlinux-rootfs-wslg.tar.gz.sha256sum
       - name: Upload
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2.0.4
         with:
           tag_name: "${{ env.ARCH_VERSION }}"
           files: |
