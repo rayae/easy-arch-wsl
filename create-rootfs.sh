@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认镜像
-default_mirror="https://mirrors.aliyun.com"
+default_mirror="https://mirror.leaseweb.net"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
