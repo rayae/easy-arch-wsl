@@ -39,7 +39,7 @@ echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirr
 pacman-key --init && pacman-key --populate && pacman -Sy --noconfirm archlinux-keyring && pacman -Syy --noconfirm
 
 # 安装环境需要的基础软件
-pacman -S --noconfirm base-devel arch-install-scripts wget curl zip unzip vim sed pacman-contrib
+pacman -S --noconfirm base-devel arch-install-scripts wget curl zip unzip vim sed pacman-contrib openssl
 # 选取最快的 6 个软件镜像
 curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&use_mirror_status=on)" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 - | sudo tee /etc/pacman.d/mirrorlist
 pacman -Syy --noconfirm
@@ -48,7 +48,7 @@ pacman -Syy --noconfirm
 mkdir -p $rootfs ${rootfs}.mount
 mount --bind ${rootfs}.mount $rootfs
 
-pacstrap -G -M -C /etc/pacman.conf -K $rootfs base base-devel wget curl zip unzip vim sed nano sudo texinfo man-db man-pages
+pacstrap -G -M -C /etc/pacman.conf -K $rootfs base base-devel wget curl zip unzip vim sed nano sudo texinfo man-db man-pages openssl
 cp /etc/pacman.conf $rootfs/etc/
 cp /etc/pacman.d/mirrorlist $rootfs/etc/pacman.d/
 
