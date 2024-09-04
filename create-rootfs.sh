@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认镜像
-default_mirror="https://mirror-hk.koddos.net"
+default_mirror="https://mirror.rackspace.com"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
