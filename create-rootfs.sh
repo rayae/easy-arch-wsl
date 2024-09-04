@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认镜像
-default_mirror="https://mirror.leaseweb.net"
+default_mirror="https://mirror-hk.koddos.net"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
