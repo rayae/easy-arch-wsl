@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认镜像
-#default_mirror="https://mirror.leaseweb.net"
+default_mirror="https://mirror.leaseweb.net"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
@@ -35,7 +35,7 @@ set -e
 # set -x
 
 # 初始化 Pacman
-#echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirrorlist
+echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirrorlist
 pacman-key --init && pacman-key --populate && pacman -Sy --noconfirm archlinux-keyring && pacman -Syy --noconfirm
 
 # 安装环境需要的基础软件
