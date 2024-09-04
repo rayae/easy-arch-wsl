@@ -2,6 +2,7 @@
 
 # 默认镜像
 default_mirror="https://mirror.rackspace.com"
+default_mirror2="https://mirrors.ustc.edu.cn"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
@@ -62,7 +63,7 @@ rm $rootfs/etc/machine-id && touch $rootfs/etc/machine-id
 arch-chroot $rootfs bash -c 'pacman-key --init && pacman-key --populate && pacman -Sy --noconfirm archlinux-keyring'
 
 # archlinuxcn 软件源
-echo -e "[archlinuxcn]\nServer = $default_mirror/archlinuxcn/\$arch\n" >> $rootfs/etc/pacman.conf
+echo -e "[archlinuxcn]\nServer = $default_mirror2/archlinuxcn/\$arch\n" >> $rootfs/etc/pacman.conf
 arch-chroot $rootfs bash -c 'pacman-key --lsign-key "farseerfc@archlinux.org" &&
     pacman -Syy archlinuxcn-keyring --noconfirm'
 
@@ -123,4 +124,3 @@ sha256sum "$output" > "$output".sha256sum
 du -h "$output"
 chmod 0777 "$output"
 chmod 0777 "$output".sha256sum
-
