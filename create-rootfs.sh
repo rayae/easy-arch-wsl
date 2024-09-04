@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认镜像
-default_mirror="https://mirror.leaseweb.net"
+#default_mirror="https://mirror.leaseweb.net"
 
 rootfs=/mnt/rootfs
 root_password="arch1234"
@@ -35,13 +35,13 @@ set -e
 # set -x
 
 # 初始化 Pacman
-echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirrorlist
+#echo "Server = $default_mirror/archlinux/\$repo/os/\$arch" >| /etc/pacman.d/mirrorlist
 pacman-key --init && pacman-key --populate && pacman -Sy --noconfirm archlinux-keyring && pacman -Syy --noconfirm
 
 # 安装环境需要的基础软件
 pacman -S --noconfirm base-devel arch-install-scripts wget curl zip unzip vim sed pacman-contrib openssl
-# 选取最快的 6 个软件镜像
-curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&use_mirror_status=on)" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 - | sudo tee /etc/pacman.d/mirrorlist
+## 选取最快的 6 个软件镜像
+#curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&use_mirror_status=on)" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 - | sudo tee /etc/pacman.d/mirrorlist
 pacman -Syy --noconfirm
 
 # 创建 rootfs
