@@ -1,4 +1,10 @@
 # easily create archlinux rootfs for WSL
+
+> [!WARNING]
+> **Archived / Deprecated**: This project is no longer maintained and will not receive further updates. GitHub Actions have been disabled.
+>
+> **已归档 / 已弃用**：本项目已停止维护，不再更新。GitHub Actions 已停用。
+
 > `docker build` 一键生成更适合中国宝宝体制的 `Arch Linux` WSL 根文件系统
 
 ## 特性
@@ -68,4 +74,3 @@ systemctl --user enable --now fcitx5 wsl-wayland-socket
 ### 中文输入法测试
 > 运行 `fcitx5-configtool` 自行添加 `Pinyin` 布局
 ![alt text](images/fcitx5.png)
-
